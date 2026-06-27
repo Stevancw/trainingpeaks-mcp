@@ -369,6 +369,8 @@ async def tp_update_library_item(
     tss: float | None = None,
     description: str | None = None,
     structure: dict[str, Any] | None = None,
+    workout_type_id: int | None = None,
+    workout_sub_type_id: int | None = None,
 ) -> dict[str, Any]:
     """Edit a workout template.
 
@@ -380,6 +382,9 @@ async def tp_update_library_item(
         tss: Optional planned TSS.
         description: Optional description.
         structure: Optional structure (nested object).
+        workout_type_id: Optional sport/workout type (1=swim, 2=bike, 3=run, ...).
+            Use to set the sport on templates that were saved without one.
+        workout_sub_type_id: Optional workout subtype id (e.g. 6=Indoor Bike).
 
     Returns:
         Dict with confirmation or error.
@@ -442,6 +447,10 @@ async def tp_update_library_item(
             existing["description"] = description
         if structure is not None:
             existing["structure"] = structure
+        if workout_type_id is not None:
+            existing["workoutTypeId"] = workout_type_id
+        if workout_sub_type_id is not None:
+            existing["workoutSubTypeId"] = workout_sub_type_id
 
         put_endpoint = (
             f"/exerciselibrary/v1/libraries/{lib_validated.workout_id}"

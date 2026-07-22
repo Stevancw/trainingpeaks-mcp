@@ -1035,6 +1035,8 @@ async def tp_create_availability(
             "startDate": f"{params.start_date.isoformat()}T00:00:00",
             "endDate": f"{params.end_date.isoformat()}T00:00:00",
             "type": 2 if limited else 1,
+            # "Other" is the only reason value verified against the live API;
+            # free-text context belongs in `description`.
             "reason": "Other",
         }
         if description:

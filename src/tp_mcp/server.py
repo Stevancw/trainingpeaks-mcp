@@ -392,7 +392,9 @@ TOOLS = [
         name="tp_unpair_workout",
         description=(
             "Unpair a workout. Detaches the completed workout file from the "
-            "planned workout, creating two separate workouts. No data is lost."
+            "planned workout, creating two separate workouts. No data is lost. "
+            "Endurance workouts only (ids from tp_get_workouts): structured "
+            "strength workouts live on a separate API and cannot be unpaired here."
         ),
         input_schema={
             "type": "object",
@@ -410,6 +412,8 @@ TOOLS = [
         description=(
             "Pair a completed workout with a planned workout. Attaches the "
             "completed data to the planned workout, merging them into one. "
+            "Endurance workouts only (ids from tp_get_workouts): structured "
+            "strength workouts live on a separate API and cannot be paired here. "
             "The result states surviving_workout_id (the id that continues to "
             "exist, verified with a follow-up GET), removed_workout_id, merged "
             "and removal_check ('confirmed' | 'still_exists' | 'unverified'); "
